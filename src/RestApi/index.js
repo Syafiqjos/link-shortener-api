@@ -1,9 +1,7 @@
-modules = [
-    require('./route/links'), // Links API CRUD
-]
+const API_VERSION = 'v1';
 
 module.exports = function(app) {
-    modules.forEach(install => {
-        install(app)
-    });
+    const install = require(`./${API_VERSION}`);
+    
+    install(app);
 }
