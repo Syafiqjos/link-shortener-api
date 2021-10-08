@@ -1,30 +1,29 @@
-module.exports = function(app){
-    const API_VERSION = process.env.API_VERSION;
-    const PATH_ROUTE = `/api/${API_VERSION}/links`;
-    const PATH_ROUTE_ID = `/api/${API_VERSION}/links/:id`;
+const express = require('express');
 
-    app.get(PATH_ROUTE, (req, res) => {
-        res.send('ok bg.');
-    });
+const router = express.Router();
 
-    app.get(PATH_ROUTE_ID, (req, res) => {
-        res.send('ok bg.' + req.params.id);
-    });
+router.get('/links', (req, res) => {
+    res.send('ok bg.');
+});
 
-    app.post(PATH_ROUTE, (req, res) => {
-        res.send('ok bg.');
-    });
-    
-    app.patch(PATH_ROUTE_ID, (req, res) => {
-        res.send('ok bg.');
-    });
+router.get('/links/:id', (req, res) => {
+    res.send('ok bg.' + req.params.id);
+});
 
-    app.put(PATH_ROUTE_ID, (req, res) => {
-        res.send('ok bg.');
-    });
+router.post('/links', (req, res) => {
+    res.send('ok bg.');
+});
 
-    app.delete(PATH_ROUTE_ID, (req, res) => {
-        res.send('ok bg.');
-    });
-    
-}
+router.patch('/links/:id', (req, res) => {
+    res.send('ok bg.');
+});
+
+router.put('/links/:id', (req, res) => {
+    res.send('ok bg.');
+});
+
+router.delete('/link/:id', (req, res) => {
+    res.send('ok bg.');
+});
+
+module.exports = router;
