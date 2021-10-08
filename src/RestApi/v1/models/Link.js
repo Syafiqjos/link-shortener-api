@@ -13,12 +13,6 @@ const linkSchema = mongoose.Schema({
         // type: String // Semisal gaada author berarti gabisa dihapus
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
-    created_at: {
-        type: Date
-    },
-    updated_at: {
-        type: Date
     }
 },
 {

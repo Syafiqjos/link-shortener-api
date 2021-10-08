@@ -16,12 +16,6 @@ const userSchema = mongoose.Schema({
     phone: {
         type: String,
         required: true
-    },
-    created_at: {
-        type: Date
-    },
-    updated_at: {
-        type: Date
     }
 },
 {
