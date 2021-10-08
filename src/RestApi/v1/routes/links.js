@@ -1,5 +1,5 @@
 module.exports = function(app){
-    const API_VERSION = 'v1';
+    const API_VERSION = process.env.API_VERSION;
     const PATH_ROUTE = `/api/${API_VERSION}/links`;
     const PATH_ROUTE_ID = `/api/${API_VERSION}/links/:id`;
 
