@@ -1,25 +1,29 @@
 module.exports = function(app){
-    app.get('/api/links', (req, res) => {
+    const API_VERSION = 'v1';
+    const PATH_ROUTE = `/api/${API_VERSION}/links`;
+    const PATH_ROUTE_ID = `/api/${API_VERSION}/links/:id`;
+
+    app.get(PATH_ROUTE, (req, res) => {
         res.send('ok bg.');
     });
 
-    app.get('/api/links/:id', (req, res) => {
+    app.get(PATH_ROUTE_ID, (req, res) => {
         res.send('ok bg.' + req.params.id);
     });
 
-    app.post('/api/links', (req, res) => {
+    app.post(PATH_ROUTE, (req, res) => {
         res.send('ok bg.');
     });
     
-    app.patch('/api/links/:id', (req, res) => {
+    app.patch(PATH_ROUTE_ID, (req, res) => {
         res.send('ok bg.');
     });
 
-    app.put('/api/links/:id', (req, res) => {
+    app.put(PATH_ROUTE_ID, (req, res) => {
         res.send('ok bg.');
     });
 
-    app.delete('/api/links/:id', (req, res) => {
+    app.delete(PATH_ROUTE_ID, (req, res) => {
         res.send('ok bg.');
     });
     
