@@ -1,11 +1,13 @@
 // Depedencies
 const express = require('express');
+const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 // EXPRESS
 const app = express();
+app.use(bodyParser.json());
 
 // DOTENV
 dotenv.config();
