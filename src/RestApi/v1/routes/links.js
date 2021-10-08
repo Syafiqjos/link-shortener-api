@@ -11,10 +11,10 @@ router.get('/links', async (req, res) => {
             status: 'success',
             data: links
         });
-    } catch {
+    } catch(err) {
         res.json({
             status: 'error',
-            data: null
+            data: err.message
         });
     }
 });
@@ -28,10 +28,10 @@ router.get('/links/:id', async (req, res) => {
             status: 'success',
             data: link
         });
-    } catch {
+    } catch(err) {
         res.json({
             status: 'error',
-            data: null
+            data: err.message
         });
     }
 });
@@ -57,10 +57,10 @@ router.post('/links', async (req, res) => {
             status: 'success',
             data: link
         });
-    } catch {
+    } catch(err) {
         res.json({
             status: 'error',
-            data: null
+            data: err.message
         });
     }
 });
@@ -83,10 +83,10 @@ router.patch('/links/:id', async (req, res) => {
             status: 'success',
             data: link
         });
-    } catch {
+    } catch(err) {
         res.json({
             status: 'error',
-            data: null
+            data: err.message
         });
     }
 });
@@ -100,10 +100,10 @@ router.delete('/links/:id', async (req, res) => {
             status: 'success',
             data: link
         });
-    } catch {
+    } catch(err) {
         res.json({
             status: 'error',
-            data: null
+            data: err.message
         });
     }
 });
