@@ -1,0 +1,28 @@
+### Links GET
+GET http://localhost:5000/api/v1/links
+
+### Links ID GET
+GET http://localhost:5000/api/v1/links/6160564d6d59bc5ca6dba2e3
+
+### Link POST
+POST http://localhost:5000/api/v1/links
+Content-Type: application/json
+
+{
+    "redirect_url" : "redirect-another",
+    "custom_url" : "custom-another",
+    "author": "kuda"
+}
+
+### Link PATCH ID
+PATCH http://localhost:5000/api/v1/links/6160564d6d59bc5ca6dba2e3
+Content-Type: application/json
+
+{
+    "redirect_url" : "karam",
+    "custom_url" : "underwater",
+    "author": "kuda"
+}
+
+### Link DELETE ID
+DELETE http://localhost:5000/api/v1/links/6160564d6d59bc5ca6dba2e3
