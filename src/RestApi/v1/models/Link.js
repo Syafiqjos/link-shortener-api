@@ -20,6 +20,12 @@ const linkSchema = mongoose.Schema({
     updated_at: {
         type: Date
     }
+},
+{
+    timestamps: { 
+        createdAt: 'created_at', 
+        updatedAt: 'updated_at'
+    }
 });
 
 const Link = mongoose.model('Link', linkSchema);
