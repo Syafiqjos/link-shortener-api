@@ -7,7 +7,8 @@ const linkSchema = mongoose.Schema({
     },
     custom_url: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     author: {
         // type: String // Semisal gaada author berarti gabisa dihapus
