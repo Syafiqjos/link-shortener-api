@@ -1,6 +1,7 @@
 const API_VERSION = process.env.API_VERSION;
 
 const modules = [
+    require(`./routes/users`), // Users API CRUD
     require(`./routes/links`), // Links API CRUD
 ]
 

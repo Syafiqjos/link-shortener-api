@@ -1,0 +1,36 @@
+### GET All Users
+GET http://localhost:5000/api/v1/users
+
+### GET ID User
+GET http://localhost:5000/api/v1/users
+
+### Login User
+POST http://localhost:5000/api/v1/user/login
+Content-Type: application/json
+
+{
+    "email": "someone@gmail.com",
+    "password": "somepassword"
+}
+
+### Register User
+POST http://localhost:5000/api/v1/user/register
+Content-Type: application/json
+
+{
+    "email": "someone@gmail.com",
+    "password": "somepassword",
+    "fullname": "My Name Is Some People"
+}
+
+### PATCH ID User
+PATCH http://localhost:5000/api/v1/users/61626ce601156c42e4c45af4
+Content-Type: application/json
+
+{
+    "fullname": "My Name Is Some People",
+    "phone": "0101010101"
+}
+
+### DELETE ID User
+DELETE http://localhost:5000/api/v1/users/61626ce601156c42e4c45af4
