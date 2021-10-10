@@ -3,17 +3,38 @@ const User = require('../models/User');
 
 const router = express.Router();
 
+function handleToken(bearer) {
+    if (bearer == null) {
+        throw Error('Invalid Auth.');
+    }
+
+    const split = bearer.split(' ');
+
+    if (split.length < 2) {
+        throw Error('Invalid Auth.');
+    }
+
+    const token = split[1];
+    
+    if (token == null) {
+        throw Error('Invalid Auth.');
+    }
+
+    return token;
+}
+
 router.post('/user/login', async (req, res) => {
     try {
         const email = req.body.email;
         const password = req.body.password;
 
         const user = await User.login(email, password);
-        
         if (user){
+            const auth = await User.getUserAuth(user);
+
             res.json({
                 status: 'success',
-                data: user
+                data: auth
             });
         } else {
             throw Error('Unknown Error.');
@@ -41,10 +62,11 @@ router.post('/user/register', async (req, res) => {
         };
 
         const user = await User.register(body);
+        const auth = await User.getUserAuth(user);
 
         res.json({
             status: 'success',
-            data: user
+            data: auth
         });
     } catch(err) {
         res.json({
@@ -54,8 +76,13 @@ router.post('/user/register', async (req, res) => {
     }
 });
 
-router.patch('/users/:id', async (req, res) => {
+router.patch('/user', async (req, res) => {
     try {
+        const bearer = req.headers.authorization;
+        const token = handleToken(bearer);
+
+        const id = await User.getPayloadAuth(token);
+
         const password = req.body.password;
         const fullname = req.body.fullname;
         const phone = req.body.phone;
@@ -66,13 +93,11 @@ router.patch('/users/:id', async (req, res) => {
             phone
         };
 
-        const id = req.params.id;
-
         const user = await User.findByIdAndUpdate(id, body, { new: true });
         
         res.json({
             status: 'success',
-            data: user
+            data: User.truncateData(user)
         });
     } catch(err) {
         res.json({
@@ -84,12 +109,15 @@ router.patch('/users/:id', async (req, res) => {
 
 router.delete('/users/:id', async (req, res) => {
     try {
-        const id = req.params.id;
+        const bearer = req.headers.authorization;
+        const token = handleToken(bearer);
+
+        const id = await User.getPayloadAuth(token);
 
         const user = await User.findByIdAndDelete(id);
         res.json({
             status: 'success',
-            data: user
+            data: User.truncateData(user)
         });
     } catch(err) {
         res.json({
