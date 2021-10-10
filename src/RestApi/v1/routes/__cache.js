@@ -24,7 +24,18 @@ function handleCacheSet(collection, key, value) {
     return promise(keypair, JSON.stringify(value));
 }
 
+function handleCacheMatch(pattern) {
+    const promise = promisify(cache.keys).bind(cache);
+
+    const keypair = pattern;
+
+    console.log(`REDIS KEYS: ${keypair}`);
+
+    return promise(keypair);
+}
+
 module.exports = {
     handleCacheGet,
-    handleCacheSet
+    handleCacheSet,
+    handleCacheMatch
 }
