@@ -4,12 +4,15 @@ const User = require('../models/User');
 
 const router = express.Router();
 
+const { handleToken } = require('./__global');
+
 router.get('/links', async (req, res) => {
     try {
         const links = await Link.find();
+        const truncatedLinks = links.map((el) => Link.truncateData(el));
         res.json({
             status: 'success',
-            data: links
+            data: truncatedLinks
         });
     } catch(err) {
         res.json({
@@ -26,7 +29,7 @@ router.get('/links/:id', async (req, res) => {
         const link = await Link.findById(id);
         res.json({
             status: 'success',
-            data: link
+            data: Link.truncateData(link)
         });
     } catch(err) {
         res.json({
@@ -40,9 +43,14 @@ router.post('/links', async (req, res) => {
     try {
         const redirect_url = req.body.redirect_url;
         const custom_url = req.body.custom_url;
-        const author_id = req.body.author_id;
 
-        const author = await User.findById(author_id);
+        let author = null;
+
+        const bearer = req.headers.authorization;
+        if (bearer){
+            const token = handleToken(bearer);
+            author = await User.checkUserAuth(token);
+        }
 
         const body = {
             redirect_url,
@@ -55,7 +63,7 @@ router.post('/links', async (req, res) => {
 
         res.json({
             status: 'success',
-            data: link
+            data: Link.truncateData(link)
         });
     } catch(err) {
         res.json({
@@ -75,13 +83,39 @@ router.patch('/links/:id', async (req, res) => {
             custom_url
         };
 
-        const id = req.params.id;
+        let user = null;
+        const bearer = req.headers.authorization;
+        if (bearer){
+            const token = handleToken(bearer);
+            user = await User.checkUserAuth(token);
+        }
 
-        const link = await Link.findByIdAndUpdate(id, body, { new: true });
+        const id = req.params.id;
+        const link = await Link.findById(id);
+
+        if (link) {
+            if (link.author && user) {
+                if (link.author.equals(user._id)) {
+                    // Good
+                } else {
+                    throw Error("Cannot update someone's link.");
+                }
+            } else {
+                throw Error('Cannot update Unathored link.');
+            }
+        } else {
+            throw Error('Link not found.');
+        }
+
+        Link.updateOne({_id: id}, { $set: body});
         
+        const newLink = link;
+        newLink.redirect_url = body.redirect_url;
+        newLink.custom_url = body.custom_url;
+
         res.json({
             status: 'success',
-            data: link
+            data: Link.truncateData(newLink)
         });
     } catch(err) {
         res.json({
@@ -93,12 +127,35 @@ router.patch('/links/:id', async (req, res) => {
 
 router.delete('/links/:id', async (req, res) => {
     try {
-        const id = req.params.id;
+        let user = null;
+        const bearer = req.headers.authorization;
+        if (bearer){
+            const token = handleToken(bearer);
+            user = await User.checkUserAuth(token);
+        }
 
-        const link = await Link.findByIdAndDelete(id);
+        const id = req.params.id;
+        const link = await Link.findById(id);
+
+        if (link) {
+            if (link.author && user) {                
+                if (link.author.equals(user._id)) {
+                    // Good
+                } else {
+                    throw Error("Cannot delete someone's link.");
+                }
+            } else {
+                throw Error('Cannot delete Unathored link.');
+            }
+        } else {
+            throw Error('Link not found.');
+        }
+
+        const newLink = await Link.findByIdAndDelete(id);
+
         res.json({
             status: 'success',
-            data: link
+            data: Link.truncateData(newLink)
         });
     } catch(err) {
         res.json({
