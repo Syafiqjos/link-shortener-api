@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { isEmail } = require('validator');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
     email: {
@@ -82,6 +83,52 @@ userSchema.statics.register = async function (body) {
         throw err
     }
 }
+
+userSchema.statics.getUserAuth = async function (user) {
+    const secret = 'somesecretmoment';
+    const token = jwt.sign({
+        id : user._id
+    }, secret);
+
+    return token;
+};
+
+userSchema.statics.checkUserAuth = async function (token) {
+    try {
+        const payload = jwt.verify(token, 'somesecretmoment');
+        const userId = payload.id;
+
+        const user = await User.findById(userId);
+
+        if (user) {
+            return user;
+        }
+    } catch(err) {
+        throw err;
+    }
+};
+
+userSchema.statics.getPayloadAuth = async function (token) {
+    try {
+        const payload = jwt.verify(token, 'somesecretmoment');
+        const userId = payload.id;
+
+        return userId;
+    } catch (err) {
+        throw err;
+    }
+};
+
+userSchema.statics.truncateData = function (user) {
+    if (user) {
+        return {
+            email: user.email,
+            fullname : user.fullname,
+            phone: user.phone
+        };
+    }
+    return null;
+};
 
 const User = mongoose.model('User', userSchema);
 
