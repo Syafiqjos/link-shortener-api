@@ -2,27 +2,30 @@
 GET http://localhost:5000/api/v1/links
 
 ### Links ID GET
-GET http://localhost:5000/api/v1/links/6160564d6d59bc5ca6dba2e3
+GET http://localhost:5000/api/v1/links/61624feba420895db8540583
+
+## eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhNzNkYmFmZDk5YWQxMDQ2N2E0OCIsImlhdCI6MTYzMzg1NjYwM30.Pv99paz8bJYVsgW6hlveqikNKq94QzaObcuYA5gcR04
 
 ### Link POST
 POST http://localhost:5000/api/v1/links
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhNzNkYmFmZDk5YWQxMDQ2N2E0OCIsImlhdCI6MTYzMzg1NjYwM30.Pv99paz8bJYVsgW6hlveqikNKq94QzaObcuYA5gcR04
 
 {
-    "redirect_url" : "redirect-another",
-    "custom_url" : "custom-another",
-    "author": "kuda"
+    "redirect_url" : "redirect-another-2",
+    "custom_url" : "custom-another"
 }
 
 ### Link PATCH ID
-PATCH http://localhost:5000/api/v1/links/6160564d6d59bc5ca6dba2e3
+PATCH http://localhost:5000/api/v1/links/6162b3c8460c2c674a8f5a58
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhNzNkYmFmZDk5YWQxMDQ2N2E0OCIsImlhdCI6MTYzMzg1NjYwM30.Pv99paz8bJYVsgW6hlveqikNKq94QzaObcuYA5gcR04
 
 {
     "redirect_url" : "karam",
-    "custom_url" : "underwater",
-    "author": "kuda"
+    "custom_url" : "custom-another-2"
 }
 
 ### Link DELETE ID
-DELETE http://localhost:5000/api/v1/links/6160564d6d59bc5ca6dba2e3
+DELETE http://localhost:5000/api/v1/links/6162b3c8460c2c674a8f5a58
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhNzNkYmFmZDk5YWQxMDQ2N2E0OCIsImlhdCI6MTYzMzg1NjYwM30.Pv99paz8bJYVsgW6hlveqikNKq94QzaObcuYA5gcR04
