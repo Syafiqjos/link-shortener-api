@@ -44,9 +44,20 @@ function handleCacheDelete(collection, key) {
     return promise(keypair);
 }
 
+function handleCacheExpire(collection, key, seconds) {
+    const promise = promisify(cache.expire).bind(cache);
+
+    const keypair = `${collection}:${key}`;
+
+    console.log(`REDIS EXPIRE: ${keypair} -> ${seconds} seconds`);
+
+    return promise(keypair, seconds);
+}
+
 module.exports = {
     handleCacheGet,
     handleCacheSet,
     handleCacheMatch,
-    handleCacheDelete
+    handleCacheDelete,
+    handleCacheExpire
 }
