@@ -5,6 +5,7 @@ const User = require('../models/User');
 const router = express.Router();
 
 const { handleToken } = require('./__global');
+const { handleCacheGet, handleCacheSet, handleCacheMatch } = require('./__cache');
 
 router.get('/links', async (req, res) => {
     try {
@@ -26,7 +27,15 @@ router.get('/links/:id', async (req, res) => {
     try {
         const id = req.params.id;
 
-        const link = await Link.findById(id);
+        let link = JSON.parse(await handleCacheGet('link', id));
+        console.log('Check Cache. -> ' + link);
+
+        if (!link) {
+            link = await Link.findById(id);
+            await handleCacheSet('link', id, link);
+            console.log('Not exist, then check database. -> ' + link);
+        }
+
         res.json({
             status: 'success',
             data: Link.truncateData(link)
