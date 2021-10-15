@@ -34,8 +34,19 @@ function handleCacheMatch(pattern) {
     return promise(keypair);
 }
 
+function handleCacheDelete(collection, key) {
+    const promise = promisify(cache.del).bind(cache);
+
+    const keypair = `${collection}:${key}`;
+
+    console.log(`REDIS DEL: ${keypair}`);
+
+    return promise(keypair);
+}
+
 module.exports = {
     handleCacheGet,
     handleCacheSet,
-    handleCacheMatch
+    handleCacheMatch,
+    handleCacheDelete
 }
