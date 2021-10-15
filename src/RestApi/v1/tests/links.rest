@@ -2,7 +2,7 @@
 GET http://localhost:5000/api/v1/links
 
 ### Links ID GET
-GET http://localhost:5000/api/v1/links/61624feba420895db8540583
+GET http://localhost:5000/api/v1/links/6169b6483142bda6767d5848
 
 ## eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhNzNkYmFmZDk5YWQxMDQ2N2E0OCIsImlhdCI6MTYzMzg1NjYwM30.Pv99paz8bJYVsgW6hlveqikNKq94QzaObcuYA5gcR04
 
@@ -12,12 +12,12 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhNzNkYmFmZDk5YWQxMDQ2N2E0OCIsImlhdCI6MTYzMzg1NjYwM30.Pv99paz8bJYVsgW6hlveqikNKq94QzaObcuYA5gcR04
 
 {
-    "redirect_url" : "redirect-another-2",
-    "custom_url" : "custom-another"
+    "redirect_url" : "bruh-3",
+    "custom_url" : "bruh-3"
 }
 
 ### Link PATCH ID
-PATCH http://localhost:5000/api/v1/links/6162b3c8460c2c674a8f5a58
+PATCH http://localhost:5000/api/v1/links/6169ab7ea801ed7bc03a074a
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhNzNkYmFmZDk5YWQxMDQ2N2E0OCIsImlhdCI6MTYzMzg1NjYwM30.Pv99paz8bJYVsgW6hlveqikNKq94QzaObcuYA5gcR04
 
@@ -27,5 +27,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhNzNkY
 }
 
 ### Link DELETE ID
-DELETE http://localhost:5000/api/v1/links/6162b3c8460c2c674a8f5a58
+DELETE http://localhost:5000/api/v1/links/6169b5bacc013858d246c525
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjJhNzNkYmFmZDk5YWQxMDQ2N2E0OCIsImlhdCI6MTYzMzg1NjYwM30.Pv99paz8bJYVsgW6hlveqikNKq94QzaObcuYA5gcR04
