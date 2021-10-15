@@ -69,6 +69,7 @@ router.post('/links', async (req, res) => {
 
         const link = new Link(body);
         await link.save();
+        await handleCacheSet('link', link._id, link);
 
         res.json({
             status: 'success',
