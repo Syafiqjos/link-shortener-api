@@ -5,7 +5,7 @@ const User = require('../models/User');
 const router = express.Router();
 
 const { handleToken } = require('./__global');
-const { handleCacheGet, handleCacheSet, handleCacheDelete } = require('./__cache');
+const { handleCacheGet, handleCacheSet, handleCacheDelete, handleCacheExpire } = require('./__cache');
 
 router.get('/links', async (req, res) => {
     try {
@@ -70,6 +70,7 @@ router.post('/links', async (req, res) => {
         const link = new Link(body);
         await link.save();
         await handleCacheSet('link', link._id, link);
+        await handleCacheExpire('link', link._id, 100);
 
         res.json({
             status: 'success',
@@ -124,6 +125,7 @@ router.patch('/links/:id', async (req, res) => {
         newLink.custom_url = body.custom_url;
 
         await handleCacheSet('link', link._id, link);
+        await handleCacheExpire('link', link._id, 100);
 
         res.json({
             status: 'success',
