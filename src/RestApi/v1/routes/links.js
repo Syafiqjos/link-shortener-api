@@ -5,7 +5,7 @@ const User = require('../models/User');
 const router = express.Router();
 
 const { handleToken } = require('./__global');
-const { handleCacheGet, handleCacheSet, handleCacheMatch } = require('./__cache');
+const { handleCacheGet, handleCacheSet, handleCacheDelete } = require('./__cache');
 
 router.get('/links', async (req, res) => {
     try {
@@ -164,6 +164,8 @@ router.delete('/links/:id', async (req, res) => {
         }
 
         const newLink = await Link.findByIdAndDelete(id);
+
+        await handleCacheDelete('link', id);
 
         res.json({
             status: 'success',
