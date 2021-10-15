@@ -117,11 +117,13 @@ router.patch('/links/:id', async (req, res) => {
             throw Error('Link not found.');
         }
 
-        Link.updateOne({_id: id}, { $set: body});
+        await Link.updateOne({_id: id}, { $set: body});
         
         const newLink = link;
         newLink.redirect_url = body.redirect_url;
         newLink.custom_url = body.custom_url;
+
+        await handleCacheSet('link', link._id, link);
 
         res.json({
             status: 'success',
