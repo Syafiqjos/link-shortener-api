@@ -204,6 +204,39 @@ test('Patch Registered user with auth token', async () => {
     expect(response.data.phone).toEqual('101010101');
 });
 
+test('Error on Get Registered user without auth token', async () => {
+    const options = {
+        hostname: 'localhost',
+        port: 5000,
+        path: '/api/v1/user',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const response = JSON.parse(await httpRequest(options));
+
+    expect(response.status).toEqual('error');
+});
+
+test('Get Registered user with auth token', async () => {
+    const options = {
+        hostname: 'localhost',
+        port: 5000,
+        path: '/api/v1/user',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    };
+
+    const response = JSON.parse(await httpRequest(options));
+
+    expect(response.status).toEqual('success');
+});
+
 test('Error on Delete Registered user without auth token', async () => {
     const options = {
         hostname: 'localhost',
