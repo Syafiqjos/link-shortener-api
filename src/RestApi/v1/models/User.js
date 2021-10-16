@@ -122,6 +122,7 @@ userSchema.statics.getPayloadAuth = async function (token) {
 userSchema.statics.truncateData = function (user) {
     if (user) {
         return {
+            _id: user._id,
             email: user.email,
             fullname : user.fullname,
             phone: user.phone
