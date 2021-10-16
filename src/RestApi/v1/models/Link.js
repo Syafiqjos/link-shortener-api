@@ -42,6 +42,7 @@ linkSchema.post('updateOne', async function(err, doc, next) {
 linkSchema.statics.truncateData = function(link) {
     if (link) {
         return {
+            _id: link._id,
             redirect_url: link.redirect_url,
             custom_url: link.custom_url,
         }
