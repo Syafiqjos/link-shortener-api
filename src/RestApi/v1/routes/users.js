@@ -89,7 +89,7 @@ router.patch('/user', async (req, res) => {
     }
 });
 
-router.delete('/users/:id', async (req, res) => {
+router.delete('/user', async (req, res) => {
     try {
         const bearer = req.headers.authorization;
         const token = handleToken(bearer);
