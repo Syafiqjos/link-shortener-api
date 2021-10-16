@@ -156,3 +156,50 @@ test('Login Registered user to get jwt token', async () => {
 
     expect(response.status).toEqual('success');
 });
+
+test('Error on Patch Registered user without auth token', async () => {
+    const options = {
+        hostname: 'localhost',
+        port: 5000,
+        path: '/api/v1/user',
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const response = JSON.parse(await httpRequest(options, 
+        { 
+            fullname: 'Underwater Eylelae',
+            phone: '101010101'
+        }
+    ));
+
+    expect(response.status).toEqual('error');
+});
+
+test('Patch Registered user with auth token', async () => {
+    const options = {
+        hostname: 'localhost',
+        port: 5000,
+        path: '/api/v1/user',
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    };
+
+    const response = JSON.parse(await httpRequest(options, 
+        { 
+            fullname: 'Underwater Eylelae',
+            phone: '101010101'
+        }
+    ));
+
+    expect(response.status).toEqual('success');
+    expect(response.data).toBeDefined();
+    expect(response.data.email).toEqual(email);
+    expect(response.data.fullname).toEqual('Underwater Eylelae');
+    expect(response.data.phone).toEqual('101010101');
+});
