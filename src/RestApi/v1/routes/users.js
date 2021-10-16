@@ -109,4 +109,24 @@ router.delete('/user', async (req, res) => {
     }
 });
 
+router.get('/user', async (req, res) => {
+    try {
+        const bearer = req.headers.authorization;
+        const token = handleToken(bearer);
+
+        const id = await User.getPayloadAuth(token);
+
+        const user = await User.findById(id);
+        res.json({
+            status: 'success',
+            data: User.truncateData(user)
+        });
+    } catch(err) {
+        res.json({
+            status: 'error',
+            data: err.message
+        });
+    }
+});
+
 module.exports = router;
