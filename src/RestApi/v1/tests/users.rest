@@ -26,7 +26,7 @@ Content-Type: application/json
 ### PATCH ID User
 PATCH http://localhost:5000/api/v1/user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjI4ZmMzYTIzNzczNTVlMmRjODJlZSIsImlhdCI6MTYzMzg0OTI5Nn0.sSP-DkIAzLba9VJqA1EZjDv8okSn_FUDp-7v5ulJYEw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmFiNDI0MTY3ZjA5NzkwYzNiMjQxNSIsImlhdCI6MTYzNDM4Mjg5M30.ggH9cl5k-3YY5w6C5e_QINNJaO1OgcSFellgmQEF89E
 
 {
     "fullname": "My Name Is Some People",
@@ -34,5 +34,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjI4ZmMzY
 }
 
 ### DELETE ID User
-DELETE http://localhost:5000/api/v1/users/61626ce601156c42e4c45af4
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjI4ZmMzYTIzNzczNTVlMmRjODJlZSIsImlhdCI6MTYzMzg0OTI5Nn0.sSP-DkIAzLba9VJqA1EZjDv8okSn_FUDp-7v5ulJYEw
+DELETE http://localhost:5000/api/v1/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmFiODdlMTY3ZjA5NzkwYzNiMjQ1ZiIsImlhdCI6MTYzNDM4NDAwMH0.TPXD_pAKdwcVNZqimlgEpWq7N7zbkIM9xGltsD5LB3g
